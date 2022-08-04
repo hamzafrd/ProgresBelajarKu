@@ -1,3 +1,23 @@
+class Animal {
+    constructor(name = '',age = 0, isMammal){
+      this.name = name
+      this.age = age
+      this.isMammal = isMammal
+    }
+  }
+  
+  class Rabbit extends Animal {
+    constructor(a,b,tambahPropertiBaru){
+        super(a,b,tambahPropertiBaru)
+        this.gaharusSama = true
+        this.isMammal = "Ya Rabbit adalah Mammal"
+    }
+  }
+
+  const a = new Rabbit("Hai",17)
+  console.log(a)
+
+/////////////////////////////////////////////////////////////////////////////
 class Mail {
     constructor(author) {
         this.from = "from : " + author;
