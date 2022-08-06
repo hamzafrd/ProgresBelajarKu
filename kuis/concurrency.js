@@ -1,4 +1,3 @@
-
 /**
  * Ini adalah program untuk mendapatkan nama user dari internet.
  * Terdapat dua fungsi yang sudah dibuat, berikut penjelasanya:
@@ -36,22 +35,13 @@ class NetworkError extends Error {
 }
 
 // TODO: 1
-const fetchingUserFromInternetxx = (callback, isOffline) => {
-  setTimeout(() => {
-    if (isOffline) {
-      callback(new NetworkError('Gagal mendapatkan data dari internet'), null);
-    }
-    callback(null, { name: 'John', age: 18 });
-  }, 500);
-};
-
 const fetchingUserFromInternet = (isOffline) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (isOffline) {
-        resolve(new NetworkError('Gagal mendapatkan data dari internet'));
+        reject(new NetworkError('Gagal mendapatkan data dari internet'));
       } else {
-        reject({ name: 'John', age: 18 });
+        resolve({ name: 'John', age: 18 });
       }
     }, 500)
   })
@@ -61,25 +51,15 @@ const fetchingUserFromInternet = (isOffline) => {
 const gettingUserName = async () => {
   try {
     const result = await fetchingUserFromInternet(false)
-    return result.message;
+    return result.name;
   } catch (error) {
-    return error.name;
+    return error.message;
   }
 }
 
-gettingUserName().then((result) => console.log(result))
-
-const gettingUserNamexx = () => {
-  fetchingUserFromInternet((error, user) => {
-    if (error) {
-      return error.message;
-    }
-    return user.name;
-  }, false);
-};
-
+gettingUserName().then((result)=> console.log(result));
 /**
  * Abaikan kode di bawah ini
  */
 
-// module.exports = { fetchingUserFromInternet, gettingUserName, NetworkError };
+module.exports = { fetchingUserFromInternet, gettingUserName, NetworkError };
