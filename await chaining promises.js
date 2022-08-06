@@ -10,6 +10,30 @@ async function makeEspresso() {
     }
 }
 
+/////////// WITHOUT ASYNC
+function makeEspresso() {
+    checkAvailability()
+        .then((value) => {
+            console.log(value);
+            return checkStock();
+        })
+        .then((value) => {
+            console.log(value)
+            const promises = [boilWater(), grindCoffeeBeans()];
+            return Promise.all(promises);
+        })
+        .then((value) => {
+            console.log(value)
+            return brewCoffee();
+        })
+        .then((value) => {
+            console.log(value);
+        })
+        .catch((rejectedReason) => {
+            console.log(rejectedReason);
+        });
+}
+/////////////////////////
 const checkAvailability = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
